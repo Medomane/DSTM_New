@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Root.master.cs" Inherits="DSTM.Root" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server" EnableViewState="false">
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/Content.css") %>' />
+    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/Layout.css") %>' />
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript" src='<%# ResolveUrl("~/Content/Script.js") %>'></script>
+</head>
+<body>
+    <form id="form1" runat="server" class="form">
+        <div class="content-wrapper">
+            <dx:ASPxPanel runat="server" ID="HeaderPanel" ClientInstanceName="headerPanel" FixedPosition="WindowTop"
+                FixedPositionOverlap="true" CssClass="app-header">
+                <PanelCollection>
+                    <dx:PanelContent runat="server">
+                        <div class="right-block">
+                            <dx:ASPxMenu runat="server" ID="RightAreaMenu" ClientInstanceName="rightAreaMenu"
+                                ItemAutoWidth="false" ItemWrap="false" ShowPopOutImages="False"
+                                SeparatorWidth="0" ApplyItemStyleToTemplates="true"
+                                Width="100%" CssClass="header-menu" OnItemClick="RightAreaMenu_ItemClick">
+                                <ItemStyle VerticalAlign="Middle" CssClass="item" />
+                                <SubMenuItemStyle CssClass="item" />
+                                <SubMenuStyle CssClass="header-sub-menu" />
+                                <Items>
+                                    <dx:MenuItem Name="AccountItem" ItemStyle-CssClass="image-item">
+                                        <TextTemplate>
+                                            <div class="account-background">
+                                                <div runat="server" id="AccountImage" class="empty-image" />
+                                            </div>
+                                        </TextTemplate>
+                                        <Items>
+                                            <dx:MenuItem Name="MyAccountItem" Text="My account" ItemStyle-CssClass="myaccount-item">
+                                                <TextTemplate>
+                                                    <div class="user-info">
+                                                        <div class="avatar">
+                                                            <img runat="server" id="AvatarUrl" src="Content/Images/user.svg" />
+                                                        </div>
+                                                        <div class="text-container">
+                                                            <dx:ASPxLabel ID="UserNameLabel" runat="server" CssClass="user-name"></dx:ASPxLabel>
+                                                            <dx:ASPxLabel ID="EmailLabel" runat="server" CssClass="email"></dx:ASPxLabel>
+                                                        </div>
+                                                    </div>
+                                                </TextTemplate>
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Name="SignOutItem" Text="Sign out" Image-Url="Content/Images/sign-out.svg" Image-Height="16px"></dx:MenuItem>
+                                        </Items>
+                                    </dx:MenuItem>
+                                </Items>
+                                <ClientSideEvents ItemClick="onRightMenuItemClick" />
+                            </dx:ASPxMenu>
+                        </div>
+                        <div class="dx-clear"></div>
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxPanel>
+
+            <div class="content" id="pageContent">
+                <asp:ContentPlaceHolder runat="server" ID="PageContent"></asp:ContentPlaceHolder>
+                <div class="footer-wrapper" id="footerWrapper">
+                    <div class="footer">
+                        <span class="footer-left">&copy; 2024 DSTM</span>
+                        <span class="footer-right">
+                            <a class="footer-link" href="#">Politique de confidentialité</a>
+                            <a class="footer-link" href="#">Conditions d'utilisation</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <dx:ASPxGlobalEvents runat="server">
+            <ClientSideEvents ControlsInitialized="onControlsInitialized" BrowserWindowResized="onBrowserWindowResized" />
+        </dx:ASPxGlobalEvents>
+    </form>
+</body>
+</html>
