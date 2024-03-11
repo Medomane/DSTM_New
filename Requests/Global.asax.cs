@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection;
+using DSTM.Code;
 
-namespace Requests {
+namespace DSTM {
     public class Global_asax : System.Web.HttpApplication {
         void Application_Start(object sender, EventArgs e) {
-            DevExpress.Web.ASPxWebControl.CallbackError += new EventHandler(Application_Error);
+            DevExpress.Web.ASPxWebControl.CallbackError += Application_Error;
             DevExpress.Security.Resources.AccessSettings.DataResources.SetRules(
                 DevExpress.Security.Resources.DirectoryAccessRule.Allow(Server.MapPath("~/Content")),
                 DevExpress.Security.Resources.UrlAccessRule.Allow()
@@ -18,8 +20,10 @@ namespace Requests {
             // Code that runs when an unhandled error occurs
         }
     
-        void Session_Start(object sender, EventArgs e) {
-            // Code that runs when a new session is started
+        void Session_Start(object sender, EventArgs e)
+        {
+            _app.Init(Assembly.GetExecutingAssembly());
+            _session.Set("CurrentTempFolder", _file.CreateFolder($"{_file.TempFolder()}/{System.Web.HttpContext.Current.Session.SessionID}"));
         }
     
         void Session_End(object sender, EventArgs e) {

@@ -22,13 +22,9 @@
     }
 
     function onRightMenuItemClick(s, e) {
-        if(e.item.name === "ToggleRightPanel") {
-            toggleRightPanel();
+        if (e.item.name !== 'SignOutItem') {
             e.processOnServer = false;
         }
-
-        if(e.item.name === "AccountItem")
-            e.processOnServer = false;
     }
 
     function HideLeftPanelIfRequired() {

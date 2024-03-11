@@ -21,9 +21,9 @@
         var password = passwordButtonEdit.GetText(),
             confirmPassword = confirmPasswordButtonEdit.GetText();
         if(editor === passwordButtonEdit && isPasswordSimple(password)) {
-            return "Use 8 characters or more for your password";
+            return "Utilisez 8 caractères ou plus pour votre mot de passe";
         } else if(editor === confirmPasswordButtonEdit && password !== confirmPassword) {
-            return "The password you entered do not match";
+            return "Le mot de passe que vous avez entré ne correspond pas";
         }
         return "";
     }

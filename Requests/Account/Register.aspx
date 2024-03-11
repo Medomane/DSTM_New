@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Root.master" CodeBehind="Register.aspx.cs" Inherits="Requests.RegisterModule" Title="Inscription" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Root.master" CodeBehind="Register.aspx.cs" Inherits="DSTM.Account.RegisterModule" Title="Inscription" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="Head">
-    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/SignInRegister.css") %>' />
-    <script type="text/javascript" src='<%# ResolveUrl("~/Content/SignInRegister.js") %>'></script>
+    <link rel="stylesheet" type="text/css" href='/Content/SignInRegister.css'/>
+    <script type="text/javascript" src='/Content/SignInRegister.js'></script>
 </asp:Content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="PageContent" runat="server">
@@ -100,6 +100,13 @@
                                             </ValidationSettings>
                                             <ClientSideEvents ButtonClick="onPasswordButtonEditButtonClick" Validation="onPasswordValidation" />
                                         </dx:ASPxButtonEdit>
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                            <dx:LayoutItem ShowCaption="False" Name="GeneralError">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <div id="GeneralErrorDiv" runat="server" class="formLayout-generalErrorText"></div>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>

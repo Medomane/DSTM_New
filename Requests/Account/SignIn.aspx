@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Root.master" CodeBehind="SignIn.aspx.cs" Inherits="DSTM.Account.SignInModule" Title="Sign In" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Root.master" CodeBehind="SignIn.aspx.cs" Inherits="DSTM.Account.SignInModule" Title="Se connecter" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="Head">
-    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/SignInRegister.css") %>' />
-    <script type="text/javascript" src='<%# ResolveUrl("~/Content/SignInRegister.js") %>'></script>
+    <link rel="stylesheet" type="text/css" href='/Content/SignInRegister.css'/>
+    <script type="text/javascript" src='/Content/SignInRegister.js'></script>
 </asp:Content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="PageContent" runat="server">
@@ -22,7 +22,7 @@
                 <Items>
                     <dx:LayoutGroup ShowCaption="False" GroupBoxDecoration="None" Paddings-Padding="16">
                         <Items>
-                            <dx:LayoutItem Caption="Email" HelpText="Veuillez saisir votre email">
+                            <dx:LayoutItem Caption="Email">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         <dx:ASPxTextBox ID="EmailTextBox" runat="server" Width="100%">

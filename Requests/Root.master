@@ -7,10 +7,16 @@
     <meta charset="UTF-8" />
     <title></title>
     <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/Content.css") %>' />
-    <link rel="stylesheet" type="text/css" href='<%# ResolveUrl("~/Content/Layout.css") %>' />
+    <link rel="stylesheet" type="text/css" href="/Content/node_modules/bootstrap/dist/css/bootstrap.css"/>
+
+    <link rel="stylesheet" type="text/css" href='/Content/Content.css' />
+    <link rel="stylesheet" type="text/css" href='/Content/Layout.css' />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
-    <script type="text/javascript" src='<%# ResolveUrl("~/Content/Script.js") %>'></script>
+    <script type="text/javascript" src='/Content/Script.js'></script>
+    
+    <script type="text/javascript" src="/Content/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/Content/node_modules/popper.js/dist/popper.js"></script>
+    <script type="text/javascript" src="/Content/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
     <form id="form1" runat="server" class="form">
@@ -19,6 +25,18 @@
                 FixedPositionOverlap="true" CssClass="app-header">
                 <PanelCollection>
                     <dx:PanelContent runat="server">
+                        <div class="left-block">
+                            <dx:ASPxMenu runat="server" ID="LeftAreaMenu" ClientInstanceName="leftAreaMenu"
+                                         ItemAutoWidth="false" ItemWrap="false" SeparatorWidth="0" EnableHotTrack="false"
+                                         Width="100%" CssClass="header-menu" SyncSelectionMode="None">
+                                <ItemStyle VerticalAlign="Middle" CssClass="item" />
+                                <Items>
+                                    <dx:MenuItem Text="" Name="HeaderLogo" ItemStyle-CssClass="image-item vertically-aligned" NavigateUrl="~/">
+                                        <Image Height="45px" Url="/Content/Images/logo.svg"/>
+                                    </dx:MenuItem>
+                                </Items>
+                            </dx:ASPxMenu>
+                        </div>
                         <div class="right-block">
                             <dx:ASPxMenu runat="server" ID="RightAreaMenu" ClientInstanceName="rightAreaMenu"
                                 ItemAutoWidth="false" ItemWrap="false" ShowPopOutImages="False"
@@ -48,7 +66,7 @@
                                                     </div>
                                                 </TextTemplate>
                                             </dx:MenuItem>
-                                            <dx:MenuItem Name="SignOutItem" Text="Sign out" Image-Url="Content/Images/sign-out.svg" Image-Height="16px"></dx:MenuItem>
+                                            <dx:MenuItem Name="SignOutItem" Text="Se déconnecter" Image-Url="Content/Images/sign-out.svg" Image-Height="16px"></dx:MenuItem>
                                         </Items>
                                     </dx:MenuItem>
                                 </Items>

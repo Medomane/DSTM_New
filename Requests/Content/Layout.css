@@ -47,7 +47,7 @@ html
 .footer-wrapper
 {
     height: 46px; /* Footer Height */
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%
 }
