@@ -92,6 +92,24 @@ namespace DSTM {
             var num = NumField.Text;
             var dateDemand = DateDemandField.Date;
             var comment = CommentField.Text;
+
+
+            foreach (DataRow dr in Data.Rows)
+            {
+                var objet = dr["Subject"]?.ToString();
+                var dateLiv = dr["DeliveryDate"].ToDate();
+
+
+            }
+            /*_db.Exec($@"insert into F_DOCENTETE  ([DO_Domaine]  ,[DO_Type]  ,[DO_Piece]   ,[DO_Date] ,do_period , [DO_Tiers] ,[CO_No]  ,[CT_NumPayeur])
+                  values(0,0,'CDE0258','12/03/2024',1,'CDSTI',2,'CDSTI')
+
+
+                SELECT 0 [DO_Domaine],0 [DO_Type],'CDSTI' [CT_Num],'CDE0258' [DO_Piece]  ,[DO_Date],1000 [DL_Ligne]--incremente par devis
+                ,[AR_Ref] 'ZREF'
+                ,[DL_Design] ,1 [DL_Qte]
+                      ,1 [DL_QteBC]  ,[CO_No] ,0[DL_MvtStock],0[DE_No] ,max ([DL_No])[DL_No] ,[DO_DateLivr] 
+                  FROM [DSTM].[dbo].[F_DOCLIGNE]");*/
         }
     }
 }
