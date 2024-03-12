@@ -11,7 +11,8 @@ namespace DSTM.Account {
         {
             var err = FormLayout.FindItemOrGroupByName("GeneralError");
             err.Visible = false;
-            if(ASPxEdit.ValidateEditorsInContainer(this)) {
+            if(ASPxEdit.ValidateEditorsInContainer(this))
+            {
                 try
                 {
                     AppUser.Login(EmailTextBox.Text, PasswordButtonEdit.Text);

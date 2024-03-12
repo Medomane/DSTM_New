@@ -42,6 +42,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Web.ASPxThemes.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Resources.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -74,6 +76,8 @@
     <Content Include="Content\Images\Article-white.svg" />
     <Content Include="Content\Images\Article.svg" />
     <Content Include="Content\Images\back.svg" />
+    <Content Include="Content\Images\check.svg" />
+    <Content Include="Content\Images\close.svg" />
     <Content Include="Content\Images\delete.svg" />
     <Content Include="Content\Images\double-close.svg" />
     <Content Include="Content\Images\double.svg" />
@@ -1941,6 +1945,7 @@
     <Content Include="Content\Script.js" />
     <Content Include="Content\SignInRegister.css" />
     <Content Include="Content\SignInRegister.js" />
+    <Content Include="Track.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GridView.aspx" />
@@ -2191,6 +2196,13 @@
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Helpers.cs" />
+    <Compile Include="Track.aspx.cs">
+      <DependentUpon>Track.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Track.aspx.designer.cs">
+      <DependentUpon>Track.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
