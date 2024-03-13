@@ -133,7 +133,28 @@ namespace DSTM {
                 ,[DL_Design] ,1 [DL_Qte]
                       ,1 [DL_QteBC]  ,[CO_No] ,0[DL_MvtStock],0[DE_No] ,max ([DL_No])[DL_No] ,[DO_DateLivr] 
                   FROM [DSTM].[dbo].[F_DOCLIGNE]");*/
+
+
+
+
+            var str = @" insert into F_DOCENTETE  ([DO_Domaine]  ,[DO_Type]  ,[DO_Piece]   ,[DO_Date] ,do_period , [DO_Tiers] ,[CO_No]  ,[CT_NumPayeur])
+                  values(0,0,'1','12/03/2024',1,'CLAA001',27,'CLAA001')";
+
+            foreach (DataRow dr in Data.Rows)
+            {
+                var objet = dr["Subject"]?.ToString();
+                var dateLiv = dr["DeliveryDate"].ToDate();//max ([DL_No])[DL_No] , [DL_No] ,
+
+                str = str + @" insert into F_DOCLIGNE([DO_Domaine], [DO_Type],[CT_Num], [DO_Piece]  ,[DO_Date], [DL_Ligne] 
+                                                ,[AR_Ref] ,[DL_Design] , [DL_Qte], [DL_QteBC]  ,[CO_No] ,[DL_MvtStock],[DE_No] ,[DO_DateLivr] ) 
+                          values( 0  ,0 ,'CLAA001',1 ,'12/03/2024'',1000 , 'ZPE' ," + objet.ToSqlString() + ",1,1,27 ,0,0 ," + dateLiv.ToSqlDate() + ")";
+
+            }
+
+            _db.Exec(str);
         }
+
+
 
         protected void ClientField_OnLoad(object sender, EventArgs e)
         {
