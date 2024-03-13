@@ -4,8 +4,8 @@
     <div class="container p-5">
         <dx:ASPxTabControl ID="ActionsTabControl" runat="server" Width="100%" TabAlign="Justify" Paddings-Padding="0">
             <Tabs>
-                <dx:Tab Text="Créer une nouvelle demande" NavigateUrl="/Default.aspx"></dx:Tab>
-                <dx:Tab Text="Suivre le statut des demandes en cours" NavigateUrl="/Track.aspx"></dx:Tab>
+                <dx:Tab Text="Créer une nouvelle demande" NavigateUrl="/Default.aspx" TabStyle-Font-Bold="True"></dx:Tab>
+                <dx:Tab Text="Suivre le statut des demandes en cours" NavigateUrl="/Track.aspx" TabStyle-Font-Bold="True"></dx:Tab>
             </Tabs>
         </dx:ASPxTabControl>
 
@@ -17,11 +17,21 @@
                         <dx:LayoutItem ShowCaption="False" RequiredMarkDisplayMode="Hidden">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer>
+                                    <dx:ASPxComboBox ID="ClientField" OnLoad="ClientField_OnLoad" ClientInstanceName="ClientField" runat="server" Width="100%" Caption="Client" Font-Bold="True">
+                                        <ValidationSettings Display="Dynamic" SetFocusOnError="true" ErrorTextPosition="Left" ErrorDisplayMode="ImageWithTooltip">
+                                            <RequiredField IsRequired="true" ErrorText="Client est obligatoire" />
+                                        </ValidationSettings>
+                                    </dx:ASPxComboBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem ShowCaption="False" RequiredMarkDisplayMode="Hidden">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer>
                                     <dx:ASPxTextBox ID="NumField" ClientInstanceName="NumField" runat="server" Width="100%" Caption="N° de la demande" Font-Bold="True">
                                         <ValidationSettings Display="Dynamic" SetFocusOnError="true" ErrorTextPosition="Left" ErrorDisplayMode="ImageWithTooltip">
                                             <RequiredField IsRequired="true" ErrorText="N° de la demande est obligatoire" />
                                         </ValidationSettings>
-                                        <ClientSideEvents Init="function(s, e){ s.Focus(); }" />
                                     </dx:ASPxTextBox>
                                 </dx:LayoutItemNestedControlContainer>
                             </LayoutItemNestedControlCollection>
@@ -61,7 +71,8 @@
                                         <Columns>
                                             <dx:GridViewCommandColumn ShowEditButton="true" ShowDeleteButton="True" Width="100" ShowNewButtonInHeader="True" />
                                             <dx:GridViewDataTextColumn FieldName="Id" Visible="False" />
-                                            <dx:GridViewDataTextColumn FieldName="Subject" Caption="Objet de la demande" />
+                                            <dx:GridViewDataComboBoxColumn FieldName="Article" Caption="Article" Width="150" />
+                                            <dx:GridViewDataTextColumn FieldName="Subject" Caption="Objet de la demande" PropertiesTextEdit-MaxLength="69" />
                                             <dx:GridViewDataDateColumn FieldName="DeliveryDate" Caption="Date de liv. souaitée" Width="150" />
                                         </Columns>
                                     </dx:ASPxGridView>

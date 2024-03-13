@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.UI;
 using DevExpress.Web;
-using System.Web.UI.HtmlControls;
 using DSTM.Code;
 using DSTM.Models;
 
@@ -9,7 +8,7 @@ namespace DSTM {
     public partial class Root : MasterPage {
         protected void Page_Init()
         {
-            if (!IsPostBack) MyFunc.CheckData(Request,Response);
+            if (!IsPostBack) _func.CheckData(Request,Response);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,15 +28,25 @@ namespace DSTM {
                 userName.Text = $"{user.Firstname} {user.Lastname}";
                 var email = (ASPxLabel)myAccountItem.FindControl("EmailLabel");
                 email.Text = user.Email;
+
+                FirstNameTextBox.Text = user.Firstname;
+                LastNameTextBox.Text = user.Lastname;
+                EmailTextBox.Text = user.Email;
             }
         }
-
 
         protected void RightAreaMenu_ItemClick(object source, DevExpress.Web.MenuItemEventArgs e) 
         {
             if (e.Item.Name != "SignOutItem") return;
             _session.Destroy();
             Response.Redirect("~/");
+        }
+
+        protected void RegisterButton_OnClick(object sender, EventArgs e)
+        {
+            if (!ASPxEdit.ValidateEditorsInContainer(ProfileForm)) return;
+            _db.Exec($"UPDATE [F_COLLABORATEUR_PASS] SET [Password] = {PasswordButtonEdit.Text.Base64Encode().ToSqlString()} WHERE F_COLLABORATEUR_No = {AppUser.Current.Id}");
+            Response.Redirect("/", false);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using DevExpress.Web;
-using System;
-using DSTM.Code;
+﻿using System;
 
 namespace DSTM.Account {
     public partial class RegisterModule : System.Web.UI.Page {
@@ -8,7 +6,7 @@ namespace DSTM.Account {
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e) {
-            var err = FormLayout.FindItemOrGroupByName("GeneralError");
+            /*var err = FormLayout.FindItemOrGroupByName("GeneralError");
             err.Visible = false;
             if (ASPxEdit.ValidateEditorsInContainer(FormLayout))
             {
@@ -26,7 +24,7 @@ namespace DSTM.Account {
                     err.Visible = true;
                     GeneralErrorDiv.InnerText = ex.Message;
                 }
-            }
+            }*/
         }
     }
 }

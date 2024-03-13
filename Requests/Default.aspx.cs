@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -13,15 +14,22 @@ namespace DSTM {
         private static List<string> Files { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Data == null)
+            if (IsPostBack)
             {
-                Data = new DataTable("data");
-                Data.Columns.Add(new DataColumn("Id", typeof(int)) { ReadOnly = false, AllowDBNull = false });
-                Data.Columns.Add(new DataColumn("Subject", typeof(string)) { ReadOnly = false, AllowDBNull = false });
-                Data.Columns.Add(new DataColumn("DeliveryDate", typeof(DateTime)) { ReadOnly = false, AllowDBNull = false });
+                if (Data == null)
+                {
+                    Data = new DataTable("data");
+                    Data.Columns.Add(new DataColumn("Id", typeof(int)) { ReadOnly = false, AllowDBNull = false });
+                    Data.Columns.Add(new DataColumn("Article", typeof(string)) { ReadOnly = false, AllowDBNull = false });
+                    Data.Columns.Add(new DataColumn("Subject", typeof(string)) { ReadOnly = false, AllowDBNull = false, MaxLength = 69 });
+                    Data.Columns.Add(new DataColumn("DeliveryDate", typeof(DateTime)) { ReadOnly = false, AllowDBNull = false });
+                }
+                GridView.DataSource = Data;
+                GridView.DataBind();
+
+                var articles = ConfigurationManager.AppSettings.AllKeys.Where(key => key.Has("article")).Select(_func.GetAppSetting);
+                foreach (var article in articles) ((GridViewDataComboBoxColumn)GridView.Columns["Article"]).PropertiesComboBox.Items.Add(article);
             }
-            GridView.DataSource = Data;
-            GridView.DataBind();
         }
 
         protected void GridView_OnRowInserting(object sender, ASPxDataInsertingEventArgs e)
@@ -38,10 +46,16 @@ namespace DSTM {
                 e.Cancel = true;
                 return;
             }
+            var valArticle = e.NewValues["Article"];
+            if (valArticle.IsNull())
+            {
+                e.Cancel = true;
+                return;
+            }
             GridView.CancelEdit();
             e.Cancel = true;
             var max = Data.Rows.Count > 0 ? Data.Rows.Cast<DataRow>().Max(row => (int)row["Id"]) : 0;
-            Data.Rows.Add(max+1, valSubject, valDeliveryDate);
+            Data.Rows.Add(max+1, valArticle, valSubject, valDeliveryDate);
             GridView.DataSource = Data;
         }
 
@@ -59,9 +73,16 @@ namespace DSTM {
                 e.Cancel = true;
                 return;
             }
+            var valArticle = e.NewValues["Article"];
+            if (valArticle.IsNull())
+            {
+                e.Cancel = true;
+                return;
+            }
             GridView.CancelEdit();
             e.Cancel = true;
             var uRow = Data.Rows.Cast<DataRow>().First(row => (int)row["Id"] == (int)e.Keys[0]);
+            uRow["Article"] = valArticle;
             uRow["Subject"] = valSubject;
             uRow["DeliveryDate"] = valDeliveryDate;
             GridView.DataSource = Data;
@@ -89,14 +110,16 @@ namespace DSTM {
         protected void ValidateButton_OnClick(object sender, EventArgs e)
         {
             if (!ASPxEdit.ValidateEditorsInContainer(FormLayout)) return;
+            var client = ClientField.Text;
             var num = NumField.Text;
             var dateDemand = DateDemandField.Date;
             var comment = CommentField.Text;
-
+            var docType = _func.GetAppSetting("DocType");
 
             foreach (DataRow dr in Data.Rows)
             {
                 var objet = dr["Subject"]?.ToString();
+                var acticle = dr["Article"]?.ToString();
                 var dateLiv = dr["DeliveryDate"].ToDate();
 
 
@@ -110,6 +133,12 @@ namespace DSTM {
                 ,[DL_Design] ,1 [DL_Qte]
                       ,1 [DL_QteBC]  ,[CO_No] ,0[DL_MvtStock],0[DE_No] ,max ([DL_No])[DL_No] ,[DO_DateLivr] 
                   FROM [DSTM].[dbo].[F_DOCLIGNE]");*/
+        }
+
+        protected void ClientField_OnLoad(object sender, EventArgs e)
+        {
+            var clients = ConfigurationManager.AppSettings.AllKeys.Where(key => key.Has("client")).Select(_func.GetAppSetting);
+            foreach (var client in clients) ClientField.Items.Add(client);
         }
     }
 }

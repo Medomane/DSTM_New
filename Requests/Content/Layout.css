@@ -467,3 +467,21 @@ a.tree-view-node.hovered
         max-width: 150px;
     }
 }
+
+
+.eye-button {
+    background: none;
+}
+
+    .eye-button > div {
+        background: url('Images/eye-button.svg') no-repeat center;
+        width: 18px;
+        height: 12px;
+        vertical-align: baseline;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .eye-button.show-password > div {
+        background: url('Images/eye-button-hide.svg') no-repeat center;
+    }

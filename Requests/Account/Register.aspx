@@ -11,7 +11,7 @@
             <dx:ASPxTabControl ID="SignInRegisterTabControl" runat="server" Width="100%" TabAlign="Justify" Paddings-Padding="0">
                 <Tabs>
                     <dx:Tab Text="Se connecter" NavigateUrl="SignIn.aspx"></dx:Tab>
-                    <dx:Tab Text="S'inscrire" NavigateUrl="Register.aspx"></dx:Tab>
+                    <%--<dx:Tab Text="S'inscrire" NavigateUrl="Register.aspx"></dx:Tab>--%>
                 </Tabs>
             </dx:ASPxTabControl>
 

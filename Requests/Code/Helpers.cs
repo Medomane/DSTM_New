@@ -16,7 +16,7 @@ using DSTM.Models;
 
 namespace DSTM.Code
 {
-    public class MyFunc
+    public class _func
     {
         public static void CheckData(HttpRequest request, HttpResponse response)
         {
@@ -24,6 +24,7 @@ namespace DSTM.Code
             if (!AppUser.IsAuthenticated() && !acc) response.Redirect("/Account/SignIn.aspx", false);
             else if(AppUser.IsAuthenticated() && acc) response.Redirect("/Default.aspx", false);
         }
+        public static string GetAppSetting(string key) => System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~").AppSettings.Settings[key]?.Value;
     }
 
 

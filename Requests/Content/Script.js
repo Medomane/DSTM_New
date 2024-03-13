@@ -22,8 +22,12 @@
     }
 
     function onRightMenuItemClick(s, e) {
+        console.log(e.item.name);
         if (e.item.name !== 'SignOutItem') {
             e.processOnServer = false;
+            if (e.item.name === 'MyAccountItem') {
+                ProfilePopup.Show();
+            }
         }
     }
 

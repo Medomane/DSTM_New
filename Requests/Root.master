@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/Content/node_modules/bootstrap/dist/css/bootstrap.css"/>
 
-    <link rel="stylesheet" type="text/css" href='/Content/Content.css' />
-    <link rel="stylesheet" type="text/css" href='/Content/Layout.css' />
+    <link rel="stylesheet" type="text/css" href="/Content/Content.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/Layout.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
-    <script type="text/javascript" src='/Content/Script.js'></script>
+    <script type="text/javascript" src="/Content/Script.js"></script>
+    <script type="text/javascript" src="/Content/SignInRegister.js"></script>
     
     <script type="text/javascript" src="/Content/node_modules/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/Content/node_modules/popper.js/dist/popper.js"></script>
@@ -80,7 +81,7 @@
 
             <div class="content" id="pageContent">
                 <asp:ContentPlaceHolder runat="server" ID="PageContent"></asp:ContentPlaceHolder>
-                <div class="footer-wrapper" id="footerWrapper">
+                <%--<div class="footer-wrapper" id="footerWrapper">
                     <div class="footer">
                         <span class="footer-left">&copy; 2024 DSTM</span>
                         <span class="footer-right">
@@ -88,12 +89,87 @@
                             <a class="footer-link" href="#">Conditions d'utilisation</a>
                         </span>
                     </div>
-                </div>
+                </div>--%>
             </div>
         </div>
         <dx:ASPxGlobalEvents runat="server">
             <ClientSideEvents ControlsInitialized="onControlsInitialized" BrowserWindowResized="onBrowserWindowResized" />
         </dx:ASPxGlobalEvents>
+        
+        <dx:ASPxPopupControl ID="ProfilePopup" runat="server" Width="500" CloseAction="CloseButton" CloseOnEscape="true" Modal="True" PopupHorizontalAlign="WindowCenter" 
+             PopupVerticalAlign="WindowCenter" ClientInstanceName="ProfilePopup" HeaderText="Modifier le mot de passe" PopupAnimationType="Slide" ScrollBars="None">
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server">
+                    <dx:ASPxFormLayout runat="server" ID="ProfileForm" ClientInstanceName="ProfileForm" UseDefaultPaddings="False">
+                        <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit"/>
+                        <Items>
+                            <dx:LayoutGroup ShowCaption="False" GroupBoxDecoration="None">
+                                <Items>
+                                    <dx:LayoutItem Caption="Prénom">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer>
+                                                <dx:ASPxTextBox ID="FirstNameTextBox" runat="server" Width="100%" ReadOnly="True"></dx:ASPxTextBox>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                    <dx:LayoutItem Caption="Nom">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer>
+                                                <dx:ASPxTextBox ID="LastNameTextBox" runat="server" Width="100%" ReadOnly="True"></dx:ASPxTextBox>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                    <dx:LayoutItem Caption="Email">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer>
+                                                <dx:ASPxTextBox ID="EmailTextBox" runat="server" Width="100%" ReadOnly="True"></dx:ASPxTextBox>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                    <dx:LayoutItem Caption="Mot de passe">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer>
+                                                <dx:ASPxButtonEdit ID="PasswordButtonEdit" runat="server" ClientInstanceName="passwordButtonEdit" Width="100%" Password="true" ClearButton-DisplayMode="Never">
+                                                    <ButtonStyle Border-BorderWidth="0" Width="6" CssClass="eye-button" HoverStyle-BackColor="Transparent" PressedStyle-BackColor="Transparent">
+                                                    </ButtonStyle>
+                                                    <ButtonTemplate>
+                                                        <div></div>
+                                                    </ButtonTemplate>
+                                                    <Buttons>
+                                                        <dx:EditButton>
+                                                        </dx:EditButton>
+                                                    </Buttons>
+                                                    <ValidationSettings Display="Dynamic" SetFocusOnError="true" ErrorTextPosition="Bottom" ErrorDisplayMode="ImageWithText">
+                                                        <RequiredField IsRequired="true" ErrorText="Mot de passe est obligatoire" />
+                                                    </ValidationSettings>
+                                                    <ClientSideEvents ButtonClick="onPasswordButtonEditButtonClick" Validation="onPasswordValidation" />
+                                                </dx:ASPxButtonEdit>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+
+                                </Items>
+                            </dx:LayoutGroup>
+
+                            <dx:LayoutGroup GroupBoxDecoration="HeadingLine" ShowCaption="False" Paddings-Padding="0">
+                                <Items>
+                                    <dx:LayoutItem ShowCaption="False" HorizontalAlign="Center">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer>
+                                                <dx:ASPxButton ID="RegisterButton" runat="server" Width="200" Text="Valider" OnClick="RegisterButton_OnClick" ValidationContainerID="ProfileForm"></dx:ASPxButton>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+                                </Items>
+                            </dx:LayoutGroup>
+                        </Items>
+                    </dx:ASPxFormLayout>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+        </dx:ASPxPopupControl>
     </form>
 </body>
 </html>
